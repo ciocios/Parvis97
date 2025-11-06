@@ -1,329 +1,56 @@
-# static.py
-
 HTML = """
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Mamma Mia</title>
-    <link rel="icon" href="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/49647/pizza-emoji-clipart-md.png" type="image/x-icon">
-    <title>Fast Search Example</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-size: 2.2vh;
-            font-family: 'Open Sans', Arial, sans-serif;
-            color: white;
-            background: url('https://i.postimg.cc/ry3p76HY/italian-seamless-free-vector-pattern3.png') center center repeat;
-            background-size: cover;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            overflow-y: auto;
-        }
-        #addon {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 0.5vh;
-            border-radius: 10px;
-            width: 65vh;
-            max-width: 100%;
-            text-align: center;
-            margin-top: 10vh;
-        }
-        .logo {
-            width: 12vh;
-            margin: 0 auto;
-            margin-bottom: 3vh;
-            margin-top: -3vh;
-        }
-        .logo img {
-            width: 100%;
-            height: auto;
-        }
-        h1, h2, h3 {
-            margin: 0;
-            text-shadow: 0 0 1vh rgba(0, 0, 0, 0.15);
-        }
-        h1 {
-            font-size: 4.5vh;
-            font-weight: 700;
-        }
-        h2 {
-            font-size: 2vh;
-            font-weight: normal;
-            font-style: italic;
-            opacity: 0.8;
-            margin-bottom: 20px;
-        }
-        h3 {
-            font-size: 2.2vh;
-            margin-bottom: 10px;
-        }
-        .provider-group {
-            display: flex;
-            align-items: center; /* Vertically align items */
-            justify-content: space-between; /* Spread items across the available space */
-            margin-bottom: 2vh;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5vh;
-            border-radius: 5px;
-            overflow: hidden;
-            width: 100%;
-
-        }
-        .provider-group label {
-            display: flex;
-            align-items: center; /* Align items within label vertically centered */
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            flex-grow: 1; /* Let the label take as much space as possible */
-            font-size: 2.2vh;
-        }
-        .provider-group input[type="checkbox"] {
-            margin-right: 1.5vh;
-            width: 4vh;
-            height: 4vh;
-        }
-        .provider-group input[type="checkbox"][id$="_mfp"] {
-            margin-left: 2.2vh;
-            width: 4vh;
-            height: 4vh;
-        }
-        .parent-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-        }
-        .contact {
-            position: absolute;
-            left: 0;
-            bottom: 4vh;
-            width: 100%;
-            text-align: center;
-        }
-        .contact a {
-            font-size: 1.4vh;
-            font-style: italic;
-        }
-        button {
-            border: 0;
-            outline: 0;
-            color: white;
-            background: #8A5AAB;
-            padding: 1.2vh 3.5vh;
-            text-align: center;
-            font-family: 'Open Sans', Arial, sans-serif;
-            font-size: 2.2vh;
-            font-weight: 600;
-            cursor: pointer;
-            display: block;
-            box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.2);
-            transition: box-shadow 0.1s ease-in-out;
-            width: 80%;
-            max-width: 35vh;
-            margin: 1vh auto;
-        }
-        button:hover {
-            box-shadow: none;
-        }
-        button:active {
-            box-shadow: 0 0 0 0.5vh white inset;
-        }
-        #manifestBox {
-            margin-top: 2vh;
-            padding: 2vh;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            display: none; /* Initially hidden */
-            text-align: left;
-            white-space: pre-wrap; /* Preserves whitespace and wraps text */
-            overflow-wrap: break-word; /* Breaks long words to prevent overflow */
-            word-wrap: break-word; /* For older browsers */
-            max-width: 100%; /* Ensures it doesn't exceed the container width */
-            border: 1px solid #ccc; /* Optional: Add a border for visibility */
-        }
-        #generateManifestButton {
-            background: #4CAF50;
-        }
-        #installButton {
-            background: #FF5722;
-        }
-        #installButton a {
-            color: white;
-            text-decoration: none;
-        }
-        #additionalText {
-            margin-top: 2vh;
-            font-size: 1.8vh;
-            text-align: left;
-        }
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 600px) {
-            .provider-group label {
-                font-size: 2vh;
-                white-space: nowrap;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div id="addon">
-        <div class="logo">
-            <img src="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/49647/pizza-emoji-clipart-md.png" alt="Logo">
-        </div>
-        <h1 class="name">Mamma Mia</h1>
-        <h2 class="version">v2.0.2</h2>
-        <div id="additionalText">
-            <h2>This addon provides Movie, Series, Anime, and Live TV HTTPS Streams.<br> https://github.com/UrloMythus/MammaMia/</h2>
-        </div>
-        <p class="description">🕵️‍♂️ = Mediaflowproxy might be needed <br>Select the box with this icon if you want to enable MFP for that source<br></p>
-        <h3 class="gives">Select Providers:</h3>
-        <form class="pure-form" id="provider-form">
-            <div class="provider-group">
-                <label for="streamingwatch" class="provider-label">
-                    <input type="checkbox" id="streamingwatch"> StreamingWatch
-                </label>
-            </div>
-             <div class="provider-group">
-                <label for="guardoserie" class="provider-label">
-                    <input type="checkbox" id="guardoserie"> Guardoserie
-                </label>
-            </div>
-             <div class="provider-group">
-                <label for="guardaflix" class="provider-label">
-                    <input type="checkbox" id="guardaflix"> Guardaflix
-                </label>
-            </div>
-            <div class="provider-group">
-                <label for="animeworld" class="provider-label">
-                    <input type="checkbox" id="animeworld"> Animeworld
-                </label>
-            </div>
-            <div class="provider-group">
-                <label for="guardaserie" class="provider-label">
-                    <input type="checkbox" id="guardaserie"> Guardaserie
-                </label>
-            </div>
-            <div class="provider-group">
-                <label for="guardahd" class="provider-label">
-                    <input type="checkbox" id="guardahd"> GuardaHD
-                </label>
-            </div>
-          <div> 
-            </div>          
-            <div class="provider-group">
-                <label for="cb01" class="provider-label">
-                    <input type="checkbox" id="cb01"> CB01 🕵️‍♂️
-                </label>
-            </div>
-            <div class="provider-group">
-                <label for="streamingcommunity" class="provider-label">
-                    <input type="checkbox" id="streamingcommunity"> StreamingCommunity 🕵️‍♂️
-                    <input type="checkbox" id="streamingcommunity_mfp" checked> 🕵️‍♂️
-                </label>
-            </div>
-             <div class="provider-group">
-                <label for="eurostreaming" class="provider-label">
-                    <input type="checkbox" id="eurostreaming"> Eurostreaming 🕵️‍♂️
-                </label>
-            </div>
-            <div class="provider-group">
-                <label for="livetv" class="provider-label">
-                    <input type="checkbox" id="livetv"> LiveTV
-                </label>
-            </div>
-            <div class="provider-group">
-                <label for="mediaflowproxy" class="provider-label">
-                    <input type="checkbox" id="mediaflowproxy"> MediaFlow Proxy
-                </label>
-                <button type="button" id="mediaFlowProxyButton">Insert Proxy Info</button>
-            </div>
-            <div id="mediaFlowProxyInputContainer" style="display: none;">
-                <input type="text" id="mediaFlowProxyInput" placeholder="Proxy URL">
-            </div>
-            <div id="mediaFlowProxyPasswordContainer" style="display: none;">
-                <input type="password" id="mediaFlowProxyPassword" placeholder="Insert Password">
-            </div>
-        </form>
-        <button id="generateManifestButton">Generate Manifest</button>
-        <div id="manifestBox"></div>
-        <button id="installButton">Install in Stremio</button>
-    </div>
-    <script>
-        // Toggle visibility of proxy input fields
-    document.getElementById('mediaFlowProxyButton').addEventListener('click', function() {
-        const inputContainer = document.getElementById('mediaFlowProxyInputContainer');
-        const passwordInputContainer = document.getElementById('mediaFlowProxyPasswordContainer');
-        inputContainer.style.display = inputContainer.style.display === 'none' ? 'block' : 'none';
-        passwordInputContainer.style.display = passwordInputContainer.style.display === 'none' ? 'block' : 'none';
-    });
-
-    // Function to generate the manifest URL
-    function generateManifest() {
-        let manifest = "|";
-        const providers = {
-            "streamingcommunity": "SC",
-            "streamingwatch": "SW",
-            "animeworld": "AW",
-            "livetv": "LIVETV",
-            "cb01": "CB",
-            "guardaserie": "GS",
-            "guardahd": "GHD",
-            "guardoserie": "GO",
-            "guardaflix": "GF",
-            "eurostreaming": "ES",
-            "streamingcommunity_mfp": "SC_MFP",
-            "mediaflowproxy": "MFP"
-        };
-
-        // Loop through providers and add selected ones to the manifest
-        for (const id in providers) {
-            if (document.getElementById(id).checked) {
-                if (id === "mediaflowproxy") {
-                    // Add proxy details if MFP is selected
-                    const proxyUrl = document.getElementById("mediaFlowProxyInput").value.trim();
-                    const proxyPassword = document.getElementById("mediaFlowProxyPassword").value.trim();
-                    if (proxyUrl && proxyPassword) {
-                        manifest += `MFP[${proxyUrl},${proxyPassword}]|`;
-                    } else {
-                        manifest += providers[id] + "|"; // Fallback to just "MFP" if no details provided
-                    }
-                } else {
-                    manifest += providers[id] + "|";
-                }
-            }
-        }
-        const encodedProviders = btoa(manifest);
-        const instanceUrl = "{instance_url}"; // Replace with your instance URL
-        const manifestUrl = instanceUrl + "/" + encodedProviders + "/" + "manifest.json";
-        return manifestUrl;
-    }
-
-    // Generate manifest URL and display it
-    document.getElementById('generateManifestButton').addEventListener('click', function() {
-        const manifestUrl = generateManifest();
-        const manifestBox = document.getElementById("manifestBox");
-        manifestBox.style.display = "block";
-        manifestBox.innerText = manifestUrl;
-    });
-
-    // Install the manifest in Stremio
-    document.getElementById('installButton').addEventListener('click', function() {
-        let manifestUrl = generateManifest();
-        manifestUrl = manifestUrl.replace("http://", "");
-        manifestUrl = manifestUrl.replace("https://", "");
-        const stremioUrl = "stremio://" + manifestUrl;
-        window.location.href = stremioUrl;
-    });
-    </script>
-</body>
-</html>
+The cat kept trying to jump up onto the kitchen counter, but it was too heavy to make it.
+Maya added her name to the list of people who wanted to attend the dance.
+My biggest problem is deciding what I should do next.
+The news that she got divorced was a big surprise.
+I wish you would make a list of the newly published books.
+The truth is, you really only have one choice.
+Meredith made a list of songs she doesn't like.
+She was wearing a white sweatshirt under a black winter coat.
+Let's all just take a moment to breathe, please!
+It doesn't look like there's any big reason to hurry.
+I accidentally left my money in my pants pocket and it got ruined in the washer.
+She liked the wallpaper in her room, but her mom insisted they remove it and put up paint instead.
+On her seventeenth birthday, she jumped from her house's third-floor balcony.
+This magazine is available in any big city in Japan.
+There was a big party at Tom's place last weekend.
+The baby threw up all over her new white dress.
+She stayed at a hostel in Poland which cost $13 a night and served free breakfast.
+Not knowing what to do is the biggest problem.
+That's a pretty big job to do all by yourself.
+I won’t believe it unless I see it with my own eyes.
+The tape got stuck on my lips so I couldn't talk anymore.
+It only took a single blow from the axe to knock the tree down.
+I'd like you to show me where the sweaters are.
+Aluminum helps to keep your food fresh for longer.
+The jeweler mounted a big pearl in the brooch.
+The moms and dads all sat around drinking coffee and eating donuts.
+The risk is higher if you wait to go to the hospital.
+To be honest with you, I am older than you think.
+It had been so long since she had seen him, she actually had to check the yearbook to remember his last name.
+Her face turned red because she was embarrassed.
+What should you do if you find a spider on your bed?
+Are you sure you don't have anything bigger?
+When she saw Walmart had rotisserie chickens, she thought, this is a miracle.
+Let's all just take a moment to breathe, please!
+She cut the covers off of all of her books so people wouldn't want to steal them.
+The Ariake Sea is one of the biggest tidelands in Japan.
+The clock was ticking and kept me awake all night.
+That house is small, but it's big enough for us.
+I've written a list of questions for you to ask Tom.
+She told him to bring a couple flashlights when they met up.
+She wanted Chipotle but didn't want to pay for it.
+You find people expressing many different opinions.
+It was a real letdown that the baby had colic.
+If you don't tell me where he went, I am going to start crying.
+She desperately wanted to meet an alien before she died.
+It's been three months and his stab wound hasn't healed yet.
+The church was white and brown and looked very old.
+I have a feeling the boss won’t be happy about this.
+I had the incredible opportunity to participate in a study abroad.
+Seen from a distance, the rock looks like an old castle.
+She told them what she wanted to do with her life, and they laughed.
+Can I lick the bottom of the ice cream container?
+Let's all just take a moment to breathe, please!
+How long does it really take to heal from a bullet wound?
 """
